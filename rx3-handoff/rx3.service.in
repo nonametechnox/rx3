@@ -1,0 +1,17 @@
+[Unit]
+Description=XDJ-RX3 firmware player (chroot) with DJ controller bridge
+After=network-online.target sound.target local-fs.target systemd-udev-settle.service
+Wants=network-online.target sound.target
+
+[Service]
+Type=forking
+ExecStart=@RX3_HOME@/rx3-start.sh
+ExecStop=@RX3_HOME@/rx3-stop.sh
+TimeoutStopSec=20
+TimeoutStartSec=120
+RemainAfterExit=yes
+LimitRTPRIO=99
+LimitMEMLOCK=infinity
+
+[Install]
+WantedBy=multi-user.target
